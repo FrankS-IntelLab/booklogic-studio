@@ -12,9 +12,22 @@ chrome.contextMenus.onClicked.addListener((info) => {
   }
 });
 
-// Relay messages
+// Hotkey: Ctrl+1 triggers voice input
+chrome.commands.onCommand.addListener((command) => {
+  if (command === "voice-input") {
+    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+      if (!tabs[0]) return;
+      chrome.scripting.executeScript({
+        target: { tabId: tabs[0].id },
+        func: runSpeechRecognition
+      });
+    });
+  }
+});
+
+// Relay messages to sidebar
 chrome.runtime.onMessage.addListener((msg) => {
-  if (msg.type === "push-text" || msg.type === "voice-final") {
+  if (msg.type === "push-text") {
     chrome.runtime.sendMessage(msg).catch(() => {});
   }
 });

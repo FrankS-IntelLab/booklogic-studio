@@ -320,6 +320,13 @@ async function sendMessage() {
   const systemPrompt = `You are a study assistant. The user is exploring a chain of concepts from a PDF:\n\nExploration path: ${contextChain}\n\nCurrent focus:\n"${node.fullText}"\n\nAnswer their questions concisely.`;
 
   try {
+    // Show thinking indicator
+    const thinkingEl = document.createElement("div");
+    thinkingEl.className = "msg msg-thinking";
+    thinkingEl.innerHTML = '<span class="thinking-dots">Thinking</span>';
+    chatMessages.appendChild(thinkingEl);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+
     const res = await fetch(cfg.url, {
       method: "POST",
       headers: {
@@ -334,6 +341,8 @@ async function sendMessage() {
         ]
       })
     });
+
+    thinkingEl.remove();
 
     if (!res.ok) {
       const err = await res.text();
@@ -350,6 +359,8 @@ async function sendMessage() {
     node.chatHistory = conversationHistory.map(m => ({ ...m }));
     saveTree();
   } catch (e) {
+    const leftover = chatMessages.querySelector(".msg-thinking");
+    if (leftover) leftover.remove();
     appendMsg("assistant", `⚠️ Request failed: ${e.message}`);
   }
 }

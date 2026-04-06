@@ -18,6 +18,12 @@
   "background": {
     "service_worker": "background/background.js"
   },
+  "commands": {
+    "voice-input": {
+      "suggested_key": { "default": "Ctrl+1", "mac": "Command+1" },
+      "description": "Start voice input"
+    }
+  },
   "action": {
     "default_icon": {
       "16": "icons/icon16.png",

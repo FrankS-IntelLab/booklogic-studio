@@ -83,6 +83,9 @@ body {
 #chat-messages { max-height: 400px; overflow-y: auto; margin-bottom: 10px; }
 .msg { padding: 8px 10px; border-radius: 6px; margin-bottom: 6px; line-height: 1.5; word-break: break-word; white-space: pre-wrap; }
 .msg-user { background: #e3f2fd; }
+.msg-thinking { background: #fff; border: 1px solid #ddd; color: #888; font-size: 13px; }
+.thinking-dots::after { content: ""; animation: dots 1.5s steps(3) infinite; }
+@keyframes dots { 0% { content: "."; } 33% { content: ".."; } 66% { content: "..."; } }
 .msg-time { display: block; font-size: 10px; color: #aaa; margin-top: 4px; text-align: right; }
 .msg-assistant { background: #fff; border: 1px solid #ddd; }
 .msg-assistant p { margin-bottom: 6px; }
