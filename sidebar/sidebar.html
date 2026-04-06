@@ -5,17 +5,13 @@
   <title>BookLogic Panel</title>
   <link rel="stylesheet" href="sidebar.css">
   <link rel="stylesheet" href="lib/katex.min.css">
-  <script src="lib/katex.min.js"></script>
-  <script src="lib/marked.min.js"></script>
 </head>
 <body>
-  <!-- Settings toggle -->
   <div class="header">
     <h1>BookLogic Studio</h1>
     <button id="settings-btn" title="Settings">⚙️</button>
   </div>
 
-  <!-- Settings panel (hidden by default) -->
   <div id="settings" class="settings hidden">
     <label>Preset
       <select id="api-preset">
@@ -37,16 +33,19 @@
     <span id="settings-status"></span>
   </div>
 
-  <p class="hint">Select text in a PDF → right-click → "Push to Panel"</p>
+  <!-- Tree view -->
+  <div id="tree-view">
+    <p class="hint">Select text in a PDF → right-click → "Push to Panel"</p>
+    <div id="tree"></div>
+    <button id="export-btn" class="export-btn hidden">📄 Export</button>
+    <button id="preview-btn" class="preview-btn hidden">👁 Preview</button>
+  </div>
 
-  <!-- Pushed items with Ask AI -->
-  <div id="items"></div>
-
-  <!-- Chat area (shown when asking AI about a snippet) -->
+  <!-- Chat area -->
   <div id="chat-area" class="hidden">
     <div class="chat-header">
       <button id="chat-back">← Back</button>
-      <span>Ask AI</span>
+      <span id="chat-breadcrumb"></span>
     </div>
     <div id="chat-snippet" class="snippet"></div>
     <div id="chat-messages"></div>
@@ -54,7 +53,21 @@
       <input type="text" id="chat-input" placeholder="Ask about this text...">
       <button id="chat-send">Send</button>
     </div>
+    <button id="branch-btn" class="branch-btn hidden">🌿 Branch selected text as child node</button>
   </div>
+
+  <!-- Preview panel -->
+  <div id="preview-area" class="hidden">
+    <div class="chat-header">
+      <button id="preview-back">← Back</button>
+      <span>Preview Export</span>
+    </div>
+    <div id="preview-content" class="preview-content"></div>
+  </div>
+
+  <script src="lib/katex.min.js"></script>
+  <script src="lib/marked.min.js"></script>
+  <script src="lib/mermaid.min.js"></script>
 
   <script src="sidebar.js"></script>
 </body>
