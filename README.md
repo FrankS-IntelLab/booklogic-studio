@@ -77,3 +77,85 @@ A problem-solving strategist focused on business decision-making and real value 
 ## License
 
 [MIT](LICENSE)
+
+---
+
+# LibreIntel（中文说明）
+
+你的智能阅读与研究助手——一款 Chrome/Edge 扩展，可从任意网页或 PDF 中捕获文本，构建探索树，并与 AI 对话以加深理解。内置 LaTeX 数学公式渲染和 Mermaid 流程图导出。
+
+## 功能
+
+- **文本捕获** — 在任意网页或 PDF 上选中文本，右键 → "Push to Panel"
+- **概念探索树** — 以父子树结构组织文本片段，实现链式探索
+- **AI 自动生成标题** — 每个节点自动获得简洁的 AI 生成标题，方便快速浏览
+- **固定与分支** — 固定某节点为父节点，后续推送的文本自动成为其子节点；也可直接从 AI 回复中分支
+- **AI 问答** — 点击任意节点即可就该内容与 LLM 对话，保留完整对话历史
+- **上下文感知** — LLM 接收完整的祖先链，理解你的探索路径
+- **语音输入** — 点击 🎤 语音提问，弹出语音覆盖层并实时转录
+- **数学公式渲染** — 通过 KaTeX 正确渲染 LaTeX 数学符号
+- **Markdown 支持** — AI 回复中的粗体、列表、代码块正确渲染
+- **Mermaid 流程图导出** — 将探索树导出为可视化思维流程图（Markdown 格式）
+- **预览与下载** — 在侧边栏预览渲染后的导出内容（含流程图），或下载为 `.md` 文件
+- **单分支导出** — 可导出或预览任意单个节点及其子节点
+- **时间戳** — 每个节点和聊天消息均带有时间戳
+- **可配置 LLM** — 自带 API Key；预设支持 DashScope（通义千问）和 OpenAI
+- **持久化存储** — 树、聊天记录和设置保存在 `chrome.storage.local`
+- **无需后端** — 一切在浏览器本地运行
+
+## 安装
+
+1. 克隆本仓库
+2. 在 Chrome 或 Edge 中打开 `chrome://extensions/`
+3. 开启 **开发者模式**
+4. 点击 **加载已解压的扩展程序** → 选择项目文件夹
+5. 点击扩展图标打开侧边栏面板
+
+## 配置 LLM
+
+点击侧边栏中的 ⚙️ 图标：
+
+| 字段 | 示例 |
+|---|---|
+| 预设 | DashScope（通义千问）/ OpenAI / 自定义 |
+| API 端点 | `https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions` |
+| API Key | 你的 API Key |
+| 模型 | `qwen-plus`、`gpt-4o-mini` 等 |
+
+任何兼容 OpenAI 的 API 端点均可使用（OpenAI、DashScope、OpenRouter、Ollama 等）。
+
+## 使用方法
+
+1. 在 Chrome 中打开任意网页或 PDF
+2. 选中文本 → 右键 → **Push "..." to Panel**
+3. 打开侧边栏 → 你的文本片段以树节点形式出现，附带 AI 生成的标题
+4. 点击节点 → 就选中的文本与 AI 对话
+5. **深入分支：** 选中 AI 回复中的文本 → 点击 🌿 创建子节点
+6. **固定父节点：** 悬停节点 → 点击 🔗 固定 → 下次推送自动成为其子节点
+7. **语音输入：** 在聊天中点击 🎤 语音提问
+8. **预览：** 点击节点上的 👁 预览该分支的 Mermaid 流程图
+9. **导出：** 点击节点上的 📥 下载该分支，或点击 📄 导出下载全部内容
+
+## 技术栈
+
+- Manifest V3 Chrome 扩展
+- 原生 JS / HTML / CSS
+- KaTeX（数学公式渲染，本地打包）
+- Marked（Markdown 解析，本地打包）
+- Mermaid（流程图渲染，本地打包）
+- Web Speech API（语音输入）
+
+## 路线图
+
+- [ ] 拖拽排序/重新设置父节点
+- [ ] 跨树节点和聊天记录搜索
+
+## 作者
+
+**Frank Sun** — [GitHub](https://github.com/FrankS-IntelLab) · [网站](https://franks-intellab.github.io/)
+
+专注于商业决策与真实价值创造的问题解决策略师，横跨数据、AI 与经济逻辑。
+
+## 许可证
+
+[MIT](LICENSE)
