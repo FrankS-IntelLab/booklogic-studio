@@ -122,12 +122,13 @@ function removeNode(id, list = nodes) {
 // --- Persistence ---
 
 function saveTree() {
-  chrome.storage.local.set({ booklogic_tree: nodes });
+  chrome.storage.local.set({ booklogic_tree: nodes, booklogic_collapsed: [...collapsedIds] });
 }
 
 function loadTree() {
-  chrome.storage.local.get(["booklogic_tree"], (data) => {
+  chrome.storage.local.get(["booklogic_tree", "booklogic_collapsed"], (data) => {
     nodes = data.booklogic_tree || [];
+    collapsedIds = new Set(data.booklogic_collapsed || []);
     renderTree();
   });
 }
@@ -200,6 +201,7 @@ function renderNodeEl(node, depth) {
         if (collapsedIds.has(node.id)) { collapsedIds.delete(node.id); } else { collapsedIds.add(node.id); }
         childContainer.classList.toggle("hidden");
         toggle.textContent = collapsedIds.has(node.id) ? "▶" : "▼";
+        chrome.storage.local.set({ booklogic_collapsed: [...collapsedIds] });
       }
     });
   } else {
